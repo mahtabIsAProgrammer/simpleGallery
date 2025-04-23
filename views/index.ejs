@@ -1,0 +1,31 @@
+<%- include('partials/header', {title : 'Home'}) %>
+<div class="gallery">
+  <% const imageList = Array.isArray(images) ? images : []; %> <% if
+  (imageList.length === 0) { %>
+  <div class="no-image">
+    <img src="image/no-data.png" />
+    <p class="no-data-text">There are no imags uploaded yet.</p>
+    <button id="addImageBtn" class="add-btn">Click here to upload Image</button>
+  </div>
+  <% } else { %> <% imageList.forEach((img) => { %> <% let ellipsisName =
+  img.name.length > 20 ? img.name.slice(0,20) + "..." : img.name %>
+  <div class="image-box">
+    <div class="img-container">
+      <img
+        src="<%= img.image %>"
+        alt="<%= img.name %>"
+        class="uploaded-image"
+      />
+    </div>
+    <p class="img-name"><%= ellipsisName %></p>
+  </div>
+  <% }); %> <% } %>
+</div>
+<div id="sidebar" class="sidebar">
+  <div class="side-container">
+    <img id="sidebarImage" src="" alt="Selected Image" />
+    <p id="sidebarImageName" class="sidebar-image-name"></p>
+  </div>
+</div>
+<%- include('partials/dialog') %>
+<script src="uiHandler.js"></script>
